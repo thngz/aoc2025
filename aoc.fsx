@@ -15,7 +15,6 @@ module Day1 =
 
     let getPart1: int =
         let input = System.IO.File.ReadAllLines("./day1/input.txt") |> Array.toList
-        // printf "%A" input
         // let input = [ "L68"; "L30"; "R48"; "L5"; "R60"; "L55"; "L1"; "L99"; "R14"; "L82"; "L201" ]
 
         let instructions: List<Instruction> =
@@ -40,11 +39,9 @@ module Day1 =
                     match ins.direction with
                     | L ->
                         let rotation = rotateLeft (fst acc) ins.turns
-                        // printf "Rotated left %A\n" rotation;
                         (rotation, if rotation = 0 then snd acc + 1 else snd acc)
                     | R ->
                         let rotation = rotateRight (fst acc) ins.turns
-                        // printf "Rotated right %A\n" rotation;
                         (rotation, if rotation = 0 then snd acc + 1 else snd acc))
                 (50, 0)
                 instructions
@@ -54,7 +51,6 @@ module Day1 =
 
     let getPart2: int =
         // let input = System.IO.File.ReadAllLines("./day1/input.txt") |> Array.toList
-        // printf "%A" input
         let input =
             [ "L68"; "L30"; "R48"; "L5"; "R60"; "L55"; "L1"; "L99"; "R14"; "L82"; "L201" ]
 
@@ -86,19 +82,19 @@ module Day1 =
         snd (
             List.fold
                 (fun acc ins ->
+                    printf "%A\n" acc
                     match ins.direction with
                     | L ->
                         let rotation = rotateLeft (fst acc) ins.turns
                         let rotate = 100 - System.Math.Abs(rotation)
                         // printf "Rotated left %A\n" rotation
-                        printf "Rotated left %A\n" rotate
-                        (rotate, (if rotation = 0 then snd acc + 1 else snd acc))
+                        (rotation, (if rotation = 0 then snd acc + 1 else snd acc))
                     | R ->
                         let rotation = rotateRight (fst acc) ins.turns
                         let rotate = 100 - System.Math.Abs(rotation)
-                        printf "Rotated right %A\n" rotate
+                        // printf "Rotated right %A\n" rotation
 
-                        (rotate, (if rotation = 0 then snd acc + 1 else snd acc)))
+                        (rotation, (if rotation = 0 then snd acc + 1 else snd acc)))
                 (50, 0)
                 instructions
         )
